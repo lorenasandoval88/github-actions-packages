@@ -3,19 +3,23 @@ name: Node.js Package
 on:
   push:
     branches:
-      - master
+    - main
 
 jobs:
   publish-gpr:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
-          scope: '@lorenasandoval88'
-      - run: npm install
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.PKG_SECRET}}
+    name: deploy to staging
+    runs-on: ubuntu-18.04
+  name: Setup Node
+  steps:
+  - uses: actions/checkout@v2
+  uses: actions/setup-node@v1
+  with:
+    node-version: 20
+    registry-url: https://npm.pkg.github.com/
+    scope: '@lorenasandoval88'
+  - name: npm install, build and test
+  run: |
+    npm install
+    npm publish
+    env:
+      NODE_AUTH_TOKEN: ${{secrets.PKG_SECRET}}
