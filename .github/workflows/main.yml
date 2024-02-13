@@ -15,9 +15,7 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
           scope: '@lorenasandoval88'
-  - name: npm install, build and test
-  run: |
-    npm install
-    npm publish
-    env:
-      NODE_AUTH_TOKEN: ${{secrets.PKG_SECRET}}
+      - run: npm install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.PKG_SECRET}}
