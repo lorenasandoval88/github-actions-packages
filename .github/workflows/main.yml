@@ -7,14 +7,14 @@ on:
 
 jobs:
   publish-gpr:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    uses: actions/setup-node@v1
-  with:
-    node-version: 20
-    registry-url: https://npm.pkg.github.com/
-    scope: '@lorenasandoval88'
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@lorenasandoval88'
   - name: npm install, build and test
   run: |
     npm install
